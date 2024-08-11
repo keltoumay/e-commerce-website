@@ -1,0 +1,5 @@
+{
+  "mongoURI": "mongodb://localhost:27017/ecommerce",
+  "jwtSecret": "your_jwt_secret",
+  "stripeSecretKey": "your_stripe_secret_key"
+}

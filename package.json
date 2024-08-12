@@ -1,0 +1,23 @@
+{
+  "name": "e-commerce-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "scripts": {
+    "test": "npx nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keltoumay/e-commerce-website.git"
+  },
+  "author": "Keltouma ouyahia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keltoumay/e-commerce-website/issues"
+  },
+  "homepage": "https://github.com/keltoumay/e-commerce-website#readme"
+}

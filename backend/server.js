@@ -1,10 +1,11 @@
+// Import dependencies
 const express = require('express');
-const connectDB = require('./config/db');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const errorHandler = require('./utils/errorHandler');
-const dotenv = require('dotenv');
 
 // Load environment variables
 dotenv.config();
@@ -12,13 +13,25 @@ dotenv.config();
 // Initialize Express app
 const app = express();
 
-// Connect to the database
+// Connect to MongoDB
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB connected');
+  } catch (err) {
+    console.error('MongoDB connection error:', err.message);
+    process.exit(1); // Exit process with failure
+  }
+};
 connectDB();
 
 // Middleware for parsing JSON requests
 app.use(express.json());
 
-// Routes
+// Define Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);

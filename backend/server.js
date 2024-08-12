@@ -17,6 +17,9 @@ const app = express();
 // Enable CORS
 app.use(cors()); // This enables CORS for all routes by default
 
+// Set Mongoose strictQuery option to suppress deprecation warning
+mongoose.set('strictQuery', true); // or false, depending on your preference
+
 // Connect to MongoDB
 const connectDB = async () => {
   try {

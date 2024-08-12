@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/keltoumay/e-commerce-website#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2"
   }

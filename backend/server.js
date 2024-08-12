@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Import cors package
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
@@ -12,6 +13,9 @@ dotenv.config();
 
 // Initialize Express app
 const app = express();
+
+// Enable CORS
+app.use(cors()); // This enables CORS for all routes by default
 
 // Connect to MongoDB
 const connectDB = async () => {

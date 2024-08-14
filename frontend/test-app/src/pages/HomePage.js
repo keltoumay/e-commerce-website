@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import ProductList from '../components/ProductList';
-import productService from '../services/productService';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../redux/actions/productActions'; // Import action
 
-function HomePage() {
-	  const [products, setProducts] = useState([]);
+const HomePage = () => {
+  const dispatch = useDispatch();
+  const products = useSelector(state => state.products);
 
-	  useEffect(() => {
-		      const fetchProducts = async () => {
-			            const data = await productService.getProducts();
-			            setProducts(data);
-			          };
+  useEffect(() => {
+    dispatch(fetchProducts()); // Fetch products on mount
+  }, [dispatch]);
 
-		      fetchProducts();
-		    }, []);
+  console.log('Products:', products); // Debugging
 
-	  return (
-		      <div>
-		        <h1>Home Page</h1>
-		        <ProductList products={products} />
-		      </div>
-		    );
-}
+  return (
+    <div>
+      <h1>Products</h1>
+      <ul>
+        {Array.isArray(products) ? (
+          products.map(product => (
+            <li key={product.id}>{product.name}</li>
+          ))
+        ) : (
+          <p>No products available.</p>
+        )}
+      </ul>
+    </div>
+  );
+};
 
 export default HomePage;

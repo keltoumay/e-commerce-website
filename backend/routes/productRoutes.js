@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const ProductController = require('../controllers/ProductController');
 const { getProducts, getProductById, createProduct, updateProduct, deleteProduct } = require('../controllers/productController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 // @route   GET api/products
 // @desc    Get all products
 // @access  Public
-router.get('/', getProducts);
+router.get('/', ProductController.getAllProducts);
 
 // @route   GET api/products/:id
 // @desc    Get product by ID

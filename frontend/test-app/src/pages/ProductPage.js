@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import productService from '../services/productService';
+import { getProducts } from '../services/productService';
 
-function ProductPage() {
-	  const { id } = useParams();
-	  const [product, setProduct] = useState(null);
+const ProductList = () => {
+  const [products, setProducts] = useState([]);
 
-	  useEffect(() => {
-		      const fetchProduct = async () => {
-			            const data = await productService.getProductById(id);
-			            setProduct(data);
-			          };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        console.log('getProducts:', getProducts); // Check if getProducts is defined
+        const data = await getProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
 
-		      fetchProduct();
-		    }, [id]);
+    fetchProducts();
+  }, []);
 
-	  return (
-		      <div>
-		        {product ? (
-				        <>
-				          <h1>{product.name}</h1>
-				          <p>{product.description}</p>
-				          <p>Price: {product.price}</p>
-				        </>
-				      ) : (
-					              <p>Loading...</p>
-					            )}
-		      </div>
-		    );
-}
+  return (
+    <div>
+      <h1>Product List</h1>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>{product.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-export default ProductPage;
+export default ProductList;

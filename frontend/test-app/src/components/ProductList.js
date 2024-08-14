@@ -1,14 +1,35 @@
-import React from 'react';
-import Product from './Product';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-function ProductList({ products }) {
-	  return (
-		      <div>
-		        {products.map((product) => (
-				        <Product key={product._id} product={product} />
-				      ))}
-		      </div>
-		    );
-}
+// Set the base URL directly in the component
+axios.defaults.baseURL = 'http://localhost:5000';
+
+const ProductList = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('/api/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  return (
+    <div>
+      <h1>Product List</h1>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>{product.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default ProductList;

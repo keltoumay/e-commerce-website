@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const errorHandler = require('./utils/errorHandler');
+const path = require('path');
 
 // Load environment variables
 dotenv.config();
@@ -37,6 +38,7 @@ connectDB();
 
 // Middleware for parsing JSON requests
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static files from the 'uploads' directory
 
 // Define Routes
 app.use('/api/auth', authRoutes);

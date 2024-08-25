@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import UploadProduct from './components/UploadProduct';
 
 function App() {
 	  return (

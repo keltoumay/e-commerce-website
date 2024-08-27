@@ -1,17 +1,42 @@
-import { LOGIN_SUCCESS, LOGOUT } from '../constants/authConstants';
+// src/redux/reducers/authReducer.js
+
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from '../actions/authActions';
 
 const initialState = {
-	  user: null,
-	  token: null,
+  token: localStorage.getItem('token') || null,
+  loading: false,
+  error: null,
 };
 
-export default function authReducer(state = initialState, action) {
-	  switch (action.type) {
-		      case LOGIN_SUCCESS:
-			        return { ...state, user: action.payload.user, token: action.payload.token };
-			      case LOGOUT:
-			        return initialState;
-			      default:
-			        return state;
-			    }
-}
+const authReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        token: action.payload.token, // Assuming response data contains a token
+        error: null,
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        token: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export default authReducer;

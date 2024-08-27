@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors'); // Import cors package
 const authRoutes = require('./routes/authRoutes');
+const protectedRoutes = require('./routes/protectedRoutes'); // Import the protected routes
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const errorHandler = require('./utils/errorHandler');
@@ -37,11 +38,15 @@ const connectDB = async () => {
 connectDB();
 
 // Middleware for parsing JSON requests
-app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve static files from the 'uploads' directory
+app.use(express.json({
+  verify: (req, res, buf) => {
+    console.log('Raw body:', buf.toString()); // Log raw request body
+  }
+}));
 
 // Define Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/protected', protectedRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 

@@ -44,6 +44,9 @@ app.use(express.json({
   }
 }));
 
+// Serve static files from 'public' directory
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
+
 // Define Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/protected', protectedRoutes);

@@ -24,17 +24,17 @@ exports.getProductById = async (req, res) => {
   }
 };
 
-// Create a new product (updated function to handle file upload)
+// Create a new product
 exports.createProduct = async (req, res) => {
   const { name, description, price, category, stock } = req.body;
-  const image = req.file ? req.file.path : ''; // Handle file upload
+  const image = req.file ? req.file.path : ''; // Handle file upload if provided
 
   try {
     const newProduct = new Product({
       name,
       description,
       price,
-      image, // Save image path
+      image, // Save image path if provided
       category,
       stock,
     });
@@ -50,7 +50,7 @@ exports.createProduct = async (req, res) => {
 // Update a product
 exports.updateProduct = async (req, res) => {
   const { name, description, price, category, stock } = req.body;
-  const image = req.file ? req.file.path : ''; // Handle file upload if updated
+  const image = req.file ? req.file.path : ''; // Handle file upload if provided
 
   try {
     const product = await Product.findById(req.params.id);

@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
+<<<<<<< HEAD
 const productController = require('../controllers/productController');
+=======
+const ProductController = require('../controllers/ProductController');
+>>>>>>> c71856280819a70cdfa540375867995355d3fa81
 const authMiddleware = require('../middleware/authMiddleware');
 
 // @route   GET api/products

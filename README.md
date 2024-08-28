@@ -50,7 +50,8 @@ This project is a backend API for an e-commerce application built with Node.js, 
    cd ../frontend
    npm install
 
-3. Running the Application
+## Running the Application
+
    To start both the backend and frontend servers, use the following scripts:
 
    Start Backend Server
